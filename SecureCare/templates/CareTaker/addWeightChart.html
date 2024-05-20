@@ -1,0 +1,104 @@
+{% extends 'CareTaker/common.html' %}
+{% block content %}
+  {% load static %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 py-3">
+          <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/people.png' %});background-position:top center;background-size:contain;"></div>
+          <!-- /.bg-holder -->
+          <h1 class="text-center">Weight Chart Input</h1>
+        </div>
+      </div>
+    </div>
+    <!-- end of .container -->
+  </section>
+  <!-- <section> close ============================ -->
+  <!-- ============================================ -->
+
+  <section class="py-5">
+    <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/doctors-bg.png' %});background-position:top center;background-size:contain;"></div>
+    <!-- /.bg-holder -->
+    <div class="container">
+      <div class="row flex-center">
+        <div class="col-xl-10 px-0">
+          {% comment %} <h2>Weight Chart Input</h2> {% endcomment %}
+
+          <form id="weightChartForm" method="post">
+            {% csrf_token %}
+
+            <label for="year">Year:</label>
+            <select id="year" name="year">
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+
+              <!-- Add more options if needed -->
+
+            </select>
+            <br />
+
+            <label for="month">Month:</label>
+            <select id="month" name="month">
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+            </select>
+            <br />
+
+            <label for="weight">Weight (kg):</label>
+            <input type="text" id="weight" name="weight" maxlength="5" pattern="\d*" placeholder="Enter weight" />
+            <br />
+
+            <button type="submit">Add Weight</button>
+            <br />
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+
+
+  <style>
+    /* Add your custom styles here */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type='text'],
+    select {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+ 
+
+
+{% endblock %}

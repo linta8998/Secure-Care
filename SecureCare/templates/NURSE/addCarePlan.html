@@ -1,0 +1,52 @@
+{% extends 'NURSE/common.html' %}
+{% block content %}
+  {% load static %}
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 py-3">
+          <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/people.png' %});background-position:top center;background-size:contain;"></div>
+          <!-- /.bg-holder -->
+          <h1 class="text-center">Care Plan</h1>
+        </div>
+      </div>
+    </div>
+    <!-- end of .container -->
+  </section>
+
+  <section class="py-8">
+    <div class="container">
+      <div class="row">
+        <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/dot-bg.png' %});background-position:bottom right;background-size:auto;"></div>
+        <div class="col-lg-6 z-index-2">
+          <form class="row g-3" method="post">
+            {% csrf_token %}
+      
+            <div class="col-md-12">
+              <label class="visually-hidden" for="inputLike">likeOrdislike</label>
+              <select class="form-select form-livedoc-control" id="inputLike" name="likeOrdislike" required>
+                <option value="">Select Like Or Dislike</option>
+                <option value="like">Like</option>
+                <option value="dislike">Dislike</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <label class="visually-hidden" for="inputNotes">Notes</label>
+              <textarea class="form-control form-livedoc-control" id="inputNotes" rows="4" placeholder="Notes" name="notes"></textarea>
+            </div>
+           
+            <div class="col-12">
+              <div class="d-grid">
+                <button class="btn btn-primary rounded-pill" type="submit">Submit</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock %}

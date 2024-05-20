@@ -1,0 +1,136 @@
+{% extends 'NURSE/common.html' %}
+{% block content %}
+  {% load static %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    table {
+      width: 750px;
+      border-collapse: collapse;
+      margin: 50px auto;
+    }
+    
+    /* Zebra striping */
+    tr:nth-of-type(odd) {
+      background: #eee;
+    }
+    
+    th {
+      background: #3498db;
+      color: white;
+      font-weight: bold;
+    }
+    
+    td,
+    th {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+      font-size: 18px;
+    }
+    
+    /* 
+                        Max width before this PARTICULAR table gets nasty
+                        This query will take effect for any screen smaller than 760px
+                        and also iPads specifically.
+                        */
+    @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+      table {
+        width: 100%;
+      }
+    
+      /* Force table to not be like tables anymore */
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+    
+      /* Hide table headers (but not display: none;, for accessibility) */
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+    
+      tr {
+        border: 1px solid #ccc;
+      }
+    
+      td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+      }
+    
+      td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        /* Label the data */
+        content: attr(data-column);
+    
+        color: #000;
+        font-weight: bold;
+      }
+    }
+  </style>
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 py-3">
+          <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/people.png' %});background-position:top center;background-size:contain;"></div>
+          <!-- /.bg-holder -->
+          <h1 class="text-center">Medicine</h1>
+        </div>
+      </div>
+    </div>
+    <!-- end of .container -->
+  </section>
+
+  <section class="py-5">
+    <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/doctors-bg.png' %});background-position:top center;background-size:contain;"></div>
+    <!-- /.bg-holder -->
+    <div class="container">
+      <div class="row flex-center">
+        <div class="col-xl-10 px-0">
+          <table>
+            <thead>
+              <tr>
+                <th>Likes</th>
+                <th>Disikes</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            {% for i in data %}
+              <tbody>
+                <tr style="text-transform: capitalize;">
+                  {% if i.likeOrdislike == 'like' %}
+                    <td data-column="Job Title">{{ i.note }}</td>
+                    <td data-column="Job Title"></td>
+                  {% elif i.likeOrdislike == 'dislike' %}
+                    <td data-column="Job Title"></td>
+                    <td data-column="Twitter">{{ i.note }}</td>
+                  {% endif %}
+                  <td data-column="Twitter">
+                    <a href="/deleteCarePlan?id={{ i.id }}" class="text-danger">Delete</a>
+                  </td>
+                </tr>
+              </tbody>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,199 @@
+{% extends 'CareTaker/common.html' %}
+{% block content %}
+  {% load static %}
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 py-3">
+          <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/people.png' %});background-position:top center;background-size:contain;"></div>
+          <!-- /.bg-holder -->
+          <h1 class="text-center"></h1>
+        </div>
+      </div>
+    </div>
+    <!-- end of .container -->
+  </section>
+  <section class="py-5">
+    <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/doctors-bg.png' %});background-position:top center;background-size:contain;"></div>
+    <!-- /.bg-holder -->
+    <div class="container">
+      <div class="row flex-center">
+        <div class="col-xl-10 px-0">
+          <style>
+            /* (A) BASIC TIMETABLE */
+            :root {
+              --row-height: 50px;
+            }
+            #timetable {
+              display: grid;
+              position: relative;
+              /* grid-template-columns: repeat(COLUMNS, WIDTH); */
+              grid-template-columns: 80px repeat(3, 1fr);
+              grid-auto-rows: var(--row-height);
+            }
+            
+            /* (B) BLANK & HEADER CELLS */
+            .cell {
+              display: flex;
+              align-items: center;
+              padding: 10px;
+              height: var(--row-height);
+              border: 1px solid #efefef;
+            }
+            .head {
+              font-weight: 700;
+              justify-content: center;
+              color: #333;
+              background: #f9f9f9;
+            }
+            
+            /* (C) ENTRY CELLS */
+            .entry {
+              position: absolute;
+              right: 0;
+              left: 0;
+              top: 0;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            
+            /* (X) DOES NOT MATTER */
+            /* PAGE & BODY */
+            * {
+              font-family: arial, sans-serif;
+              box-sizing: border-box;
+            }
+            
+            body {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;
+            }
+            
+            /* WIDGET */
+            .widget-wrap {
+              width: 600px;
+              padding: 30px;
+              border-radius: 20px;
+              background: rgba(255, 255, 255, 0.8);
+            }
+            
+            /* FOOTER */
+            #code-boxx {
+              font-weight: 600;
+              margin-top: 30px;
+            }
+            #code-boxx a {
+              display: inline-block;
+              border: 0;
+              padding: 5px;
+              text-decoration: none;
+              background: #b90a0a;
+              color: #fff;
+            }
+          </style>
+
+          <a href="/addFoodTt?id={{ id }}" style="float: right;font-weight: 900;"><button class="btn btn-outline-secondary">+ Meals</button></a>
+          <div class="widget-wrap">
+            <h1>FOOD TIMETABLE</h1>
+
+            <div id="timetable">
+              <!-- (A) FIRST ROW : TIME -->
+              <div class="cell head">&nbsp;</div>
+              <div class="cell head">Breakfast</div>
+              <div class="cell head">Lunch</div>
+              <div class="cell head">Dinner</div>
+
+              <!-- (B) FOLLOWING ROWS : MON TO SUN -->
+              <div class="cell head">Mon</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell head">Tue</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell head">Wed</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell head">Thur</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell head">Fri</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell head">Sat</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell head">Sun</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+              <div class="cell">&nbsp;</div>
+
+              <!-- (C) TIME TABLE ENTRIES -->
+              {% for i in data %}
+                {% if i.meal == 'breakfast' %}
+                  {% if i.day == 'monday' %}
+                    <div class="cell entry" style="grid-column: 2 / 3; grid-row: 2; color: #fff; background: #2498ab;">{{ i.menu }}</div>
+                  {% elif i.day == 'tuesday' %}
+                    <div class="cell entry" style="grid-column: 2 / 3; grid-row: 3; color: #fff; background: #2498ab;">{{ i.menu }}</div>
+                  {% elif i.day == 'wednesday' %}
+                    <div class="cell entry" style="grid-column: 2 / 3; grid-row: 4; color: #fff; background: #2498ab;">{{ i.menu }}</div>
+                  {% elif i.day == 'thursday' %}
+                    <div class="cell entry" style="grid-column: 2 / 3; grid-row: 5; color: #fff; background: #2498ab;">{{ i.menu }}</div>
+                  {% elif i.day == 'friday' %}
+                    <div class="cell entry" style="grid-column: 2 / 3; grid-row: 6; color: #fff; background: #2498ab;">{{ i.menu }}</div>
+                  {% elif i.day == 'saturday' %}
+                    <div class="cell entry" style="grid-column: 2 / 3; grid-row: 7; color: #fff; background: #2498ab;">{{ i.menu }}</div>
+                  {% elif i.day == 'sunday' %}
+                    <div class="cell entry" style="grid-column: 2 / 3; grid-row: 8; color: #fff; background: #2498ab;">{{ i.menu }}</div>
+                  {% endif %}
+                {% elif i.meal == 'lunch' %}
+                  {% if i.day == 'monday' %}
+                    <div class="cell entry" style="grid-column: 3 / 4; grid-row: 2; color: #fff; background: #1563bd;">{{ i.menu }}</div>
+                  {% elif i.day == 'tuesday' %}
+                    <div class="cell entry" style="grid-column: 3 / 4; grid-row: 3; color: #fff; background: #1563bd;">{{ i.menu }}</div>
+                  {% elif i.day == 'wednesday' %}
+                    <div class="cell entry" style="grid-column: 3 / 4; grid-row: 4; color: #fff; background: #1563bd;">{{ i.menu }}</div>
+                  {% elif i.day == 'thursday' %}
+                    <div class="cell entry" style="grid-column: 3 / 4; grid-row: 5; color: #fff; background: #1563bd;">{{ i.menu }}</div>
+                  {% elif i.day == 'friday' %}
+                    <div class="cell entry" style="grid-column: 3 / 4; grid-row: 6; color: #fff; background: #1563bd;">{{ i.menu }}</div>
+                  {% elif i.day == 'saturday' %}
+                    <div class="cell entry" style="grid-column: 3 / 4; grid-row: 7; color: #fff; background: #1563bd;">{{ i.menu }}</div>
+                  {% elif i.day == 'sunday' %}
+                    <div class="cell entry" style="grid-column: 3 / 4; grid-row: 8; color: #fff; background: #1563bd;">{{ i.menu }}</div>
+                  {% endif %}
+                {% elif i.meal == 'dinner' %}
+                  {% if i.day == 'monday' %}
+                    <div class="cell entry" style="grid-column: 4 / 5; grid-row: 2; color: #fff; background: #1513ad;">{{ i.menu }}</div>
+                  {% elif i.day == 'tuesday' %}
+                    <div class="cell entry" style="grid-column: 4 / 5; grid-row: 3; color: #fff; background: #1513ad;">{{ i.menu }}</div>
+                  {% elif i.day == 'wednesday' %}
+                    <div class="cell entry" style="grid-column: 4 / 5; grid-row: 4; color: #fff; background: #1513ad;">{{ i.menu }}</div>
+                  {% elif i.day == 'thursday' %}
+                    <div class="cell entry" style="grid-column: 4 / 5; grid-row: 5; color: #fff; background: #1513ad;">{{ i.menu }}</div>
+                  {% elif i.day == 'friday' %}
+                    <div class="cell entry" style="grid-column: 4 / 5; grid-row: 6; color: #fff; background: #1513ad;">{{ i.menu }}</div>
+                  {% elif i.day == 'saturday' %}
+                    <div class="cell entry" style="grid-column: 4 / 5; grid-row: 7; color: #fff; background: #1513ad;">{{ i.menu }}</div>
+                  {% elif i.day == 'sunday' %}
+                    <div class="cell entry" style="grid-column: 4 / 5; grid-row: 8; color: #fff; background: #1513ad;">{{ i.menu }}</div>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

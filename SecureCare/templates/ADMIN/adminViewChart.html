@@ -1,0 +1,62 @@
+{% extends 'ADMIN/common.html' %}
+{% block content %}
+  {% load static %}
+
+  <style>
+    .chart-container {
+      width: 100%;
+      margin: auto;
+      padding: 12px;
+    }
+  </style>
+  <section class="py-5">
+    <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/doctors-bg.png' %});background-position:top center;background-size:contain;"></div>
+    <!-- /.bg-holder -->
+    <div class="container">
+      <div class="row flex-center">
+        <div class="col-xl-10 px-0">
+          <div class="chart-container">
+            <canvas id="weightChart"></canvas>
+          </div>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <script>
+            // Get data passed from the view
+            const chartData = JSON.parse('{{ chart_data|escapejs }}')
+            
+            // Extracting labels (months with years) and data (weights)
+            const labels = chartData.map((entry) => entry.month + ' ' + entry.year)
+            const weights = chartData.map((entry) => entry.weight)
+            
+            // Chart configuration
+            const config = {
+              type: 'bar',
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: 'Weight (kg)',
+                    data: weights,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)', // Blue color
+                    borderColor: 'rgba(54, 162, 235, 1)', // Border color
+                    borderWidth: 1
+                  }
+                ]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            }
+            
+            // Draw chart
+            const ctx = document.getElementById('weightChart').getContext('2d')
+            const myChart = new Chart(ctx, config)
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

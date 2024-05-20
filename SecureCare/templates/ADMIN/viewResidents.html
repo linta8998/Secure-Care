@@ -1,0 +1,75 @@
+{% extends 'ADMIN/common.html' %}
+{% block content %}
+  {% load static %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 py-3">
+          <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/people.png' %});background-position:top center;background-size:contain;"></div>
+          <!-- /.bg-holder -->
+          <h1 class="text-center">Our Residents</h1>
+        </div>
+      </div>
+    </div>
+    <!-- end of .container -->
+  </section>
+  <!-- <section> close ============================ -->
+  <!-- ============================================ -->
+
+  <section class="py-5">
+    <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/doctors-bg.png' %});background-position:top center;background-size:contain;"></div>
+    <!-- /.bg-holder -->
+    <div class="container">
+      <div class="row flex-center">
+        <div class="col-xl-10 px-0">
+          <div class="carousel slide" id="carouselExampleDark" data-bs-ride="carousel">
+            {% comment %} <a class="carousel-control-prev carousel-icon z-index-2" href="#carouselExampleDark" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next carousel-icon z-index-2" href="#carouselExampleDark" role="button" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></a> {% endcomment %}
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="10000">
+                <a href="/addResidents" style="float: right;font-weight: 900;"><button class="btn btn-outline-secondary">+ Resident</button></a>
+                <div class="row h-100 m-lg-7 mx-3 mt-6 mx-md-4 my-md-7">
+                  {% if data %}
+                  {% for i in data %}
+                    <div class="col-md-4 mb-8 mb-md-0">
+                      <div class="card card-span h-100 shadow">
+                        <div class="card-body d-flex flex-column flex-center py-5">
+                          <img src="../static/media/{{ i.image }}" width="128" alt="{{ i.image }}" />
+
+                          <h5 class="mt-3" style="text-transform: capitalize;">{{ i.name }} <span class="text-500 mb-4">({{ i.age }})</span></h5>
+
+                          <p class="mb-0 fs-l-1">{{ i.email }}</p>
+                          <p class="mb-0 fs-l-1">{{ i.phone }}</p>
+
+                          <p class="text-600 mb-0">{{ i.address }}</p>
+
+                          <div class="text-center">
+                            {% comment %} <button class="btn btn-outline-secondary rounded-pill" type="submit">View Profile</button> {% endcomment %}
+                          </div>
+                        </div>
+                        <div>
+                          <a href="/deleteResident?id={{ i.id }}" style="margin: 20px; color: red;"><i class="fa-sharp fa-solid fa-trash"></i></a>
+                          <a href="/adminViewChart?id={{ i.id }}" style="margin-left: 90px; color: blueviolet;"><i class="fa-sharp fa-solid fa-line-chart"></i></a>
+                          <a href="/updateResident?id={{ i.id }}" style="float: right;margin: 0px 20px;  color: green;">Edit <i class="fa-sharp fa-solid fa-pencil"></i></a><br>
+                          <a href="/adminViewCareplan?id={{ i.id }}" style="float: right;margin-right: 20px; color: blueviolet;">Care Plan</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  {% else %}
+                  <div class="col-md-4 mb-8 mb-md-0">
+                    <H1 style="margin: 100px;">No Datas</H1>
+                  </div>
+                {% endif %}
+                  <br />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+{% endblock %}

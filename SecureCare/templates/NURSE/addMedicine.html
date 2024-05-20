@@ -1,0 +1,58 @@
+{% extends 'NURSE/common.html' %}
+{% block content %}
+  {% load static %}
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 py-3">
+          <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/people.png' %});background-position:top center;background-size:contain;"></div>
+          <!-- /.bg-holder -->
+          <h1 class="text-center">Medicine Prescription</h1>
+        </div>
+      </div>
+    </div>
+    <!-- end of .container -->
+  </section>
+
+  <section class="py-8">
+    <div class="container">
+      <div class="row">
+        <div class="bg-holder bg-size" style="background-image:url({% static 'assets/img/gallery/dot-bg.png' %});background-position:bottom right;background-size:auto;"></div>
+        <div class="col-lg-6 z-index-2">
+          <form class="row g-3" method="post">
+            {% csrf_token %}
+      
+            <div class="col-md-6">
+              <label class="visually-hidden" for="inputMedicineName">Medicine Name</label>
+              <input class="form-control form-livedoc-control" id="inputMedicineName" type="text" placeholder="Medicine Name" name="name" />
+            </div>
+            <div class="col-md-6">
+              <label class="visually-hidden" for="inputDosage">Dosage</label>
+              <input class="form-control form-livedoc-control" id="inputDosage" type="text" placeholder="Dosage" name="dosage" />
+            </div>
+            <div class="col-md-6">
+              <label class="visually-hidden" for="inputFrequency">Frequency</label>
+              <input class="form-control form-livedoc-control" id="inputFrequency" type="text" placeholder="Frequency" name="frequency" />
+            </div>
+            <div class="col-md-6">
+              <label class="visually-hidden" for="bf_af">Before or After Food</label>
+              <input class="form-control form-livedoc-control" id="inputStartDate" type="text" placeholder="Before or After Food" name="bf_af" />
+            </div>
+
+            <div class="col-12">
+              <label class="visually-hidden" for="inputNotes">Notes</label>
+              <textarea class="form-control form-livedoc-control" id="inputNotes" rows="4" placeholder="Notes" name="notes"></textarea>
+            </div>
+            <div class="col-12">
+              <div class="d-grid">
+                <button class="btn btn-primary rounded-pill" type="submit">Submit Prescription</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock %}
